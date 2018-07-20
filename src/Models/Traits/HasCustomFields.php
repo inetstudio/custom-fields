@@ -48,7 +48,7 @@ trait HasCustomFields
      *
      * @return mixed
      */
-    public function getAllMeta()
+    public function getAllCustomFields()
     {
         return $this->custom_fields()->pluck('value', 'key')->toArray();
     }
