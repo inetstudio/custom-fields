@@ -2,6 +2,7 @@
 
 namespace InetStudio\CustomFields\Models\Traits;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
@@ -28,7 +29,7 @@ trait HasCustomFields
      */
     public function custom_fields(): MorphMany
     {
-        return $this->morphMany(static::getCustomFieldsClassName(), 'customizable')->withTimestamps();
+        return $this->morphMany(static::getCustomFieldsClassName(), 'customizable');
     }
 
     /**
@@ -84,8 +85,11 @@ trait HasCustomFields
             return $this->addCustomField($key, $newValue);
         }
 
+        $now = Carbon::now()->format('Y-m-d H:m:s');
+
         return $customField->update([
             'value' => $newValue,
+            'updated_at' => $now,
         ]);
     }
 
@@ -108,9 +112,13 @@ trait HasCustomFields
             return $existing;
         }
 
+        $now = Carbon::now()->format('Y-m-d H:m:s');
+
         return $this->custom_fields()->create([
             'key' => $key,
             'value' => (string) $value,
+            'created_at' => $now,
+            'updated_at' => $now,
         ]);
     }
 
