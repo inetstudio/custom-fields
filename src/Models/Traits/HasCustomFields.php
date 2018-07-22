@@ -62,9 +62,13 @@ trait HasCustomFields
      *
      * @return mixed
      */
-    public function getCustomField($key, $default = null)
+    public function getCustomField($key, $default = null, $returnObject = false)
     {
         $customField = $this->custom_fields()->where('key', $key)->first();
+
+        if ($returnObject) {
+            return $customField;
+        }
 
         return ($customField) ? $customField->value : $default;
     }
@@ -79,7 +83,7 @@ trait HasCustomFields
      */
     public function updateCustomField($key, $newValue)
     {
-        $customField = $this->getCustomField($key, null);
+        $customField = $this->getCustomField($key, null, true);
 
         if ($customField == null) {
             return $this->addCustomField($key, $newValue);
