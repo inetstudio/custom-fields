@@ -21,16 +21,6 @@ class CustomFieldsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Регистрация привязки в контейнере.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        $this->registerBindings();
-    }
-
-    /**
      * Регистрация команд.
      *
      * @return void
@@ -59,19 +49,5 @@ class CustomFieldsServiceProvider extends ServiceProvider
                 ], 'migrations');
             }
         }
-    }
-
-    /**
-     * Регистрация привязок, алиасов и сторонних провайдеров сервисов.
-     *
-     * @return void
-     */
-    protected function registerBindings(): void
-    {
-        // Models
-        $this->app->bind('InetStudio\CustomFields\Contracts\Models\CustomFieldModelContract',  'InetStudio\CustomFields\Models\CustomFieldModel');
-
-        // Services
-        $this->app->bind('InetStudio\CustomFields\Contracts\Services\Back\CustomFieldsServiceContract', 'InetStudio\CustomFields\Services\Back\CustomFieldsService');
     }
 }

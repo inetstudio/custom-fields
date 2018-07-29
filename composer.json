@@ -17,6 +17,7 @@
     "extra": {
       "laravel": {
         "providers": [
+          "InetStudio\\CustomFields\\Providers\\CustomFieldsBindingsServiceProvider",
           "InetStudio\\CustomFields\\Providers\\CustomFieldsServiceProvider"
         ]
       }
