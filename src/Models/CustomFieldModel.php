@@ -3,18 +3,18 @@
 namespace InetStudio\CustomFields\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Venturecraft\Revisionable\RevisionableTrait;
 use InetStudio\CustomFields\Contracts\Models\CustomFieldModelContract;
 
 /**
  * Class CustomFieldModel.
  */
-class CustomFieldModel extends Model implements CustomFieldModelContract
+class CustomFieldModel extends Model implements CustomFieldModelContract, Auditable
 {
     use SoftDeletes;
 
-    use RevisionableTrait;
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * Связанная с моделью таблица.
@@ -44,7 +44,12 @@ class CustomFieldModel extends Model implements CustomFieldModelContract
         'deleted_at',
     ];
 
-    protected $revisionCreationsEnabled = true;
+    /**
+     * Should the timestamps be audited?
+     *
+     * @var bool
+     */
+    protected $auditTimestamps = true;
 
     /**
      * Полиморфное отношение с остальными моделями.

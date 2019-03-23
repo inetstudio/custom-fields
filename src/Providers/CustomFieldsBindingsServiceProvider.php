@@ -3,17 +3,13 @@
 namespace InetStudio\CustomFields\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
  * Class CustomFieldsBindingsServiceProvider.
  */
-class CustomFieldsBindingsServiceProvider extends ServiceProvider
+class CustomFieldsBindingsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-    * @var  bool
-    */
-    protected $defer = true;
-
     /**
     * @var  array
     */
