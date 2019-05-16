@@ -1,25 +1,30 @@
 {
-    "name": "inetstudio/custom-fields",
-    "description": "Package for custom fields",
-    "homepage": "https://github.com/inetstudio/custom-fields",
-    "license": "MIT",
-    "authors": [
-      {
-        "name": "Konstantin Bukin",
-        "email": "bukin@inetstudio.ru"
-      }
-    ],
-    "autoload": {
-      "psr-4": {
-        "InetStudio\\CustomFields\\": "src/"
-      }
-    },
-    "extra": {
-      "laravel": {
-        "providers": [
-          "InetStudio\\CustomFields\\Providers\\CustomFieldsBindingsServiceProvider",
-          "InetStudio\\CustomFields\\Providers\\CustomFieldsServiceProvider"
-        ]
-      }
+  "name": "inetstudio/custom-fields",
+  "description": "Package for custom fields",
+  "homepage": "https://github.com/inetstudio/custom-fields",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Konstantin Bukin",
+      "email": "bukin@inetstudio.ru"
     }
+  ],
+  "require": {
+    "inetstudio/admin-panel": "1.8.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "InetStudio\\CustomFieldsPackage\\": "package/src",
+      "InetStudio\\CustomFieldsPackage\\Fields\\": "entities/fields/src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "InetStudio\\CustomFieldsPackage\\Providers\\ServiceProvider",
+        "InetStudio\\CustomFieldsPackage\\Fields\\Providers\\BindingsServiceProvider",
+        "InetStudio\\CustomFieldsPackage\\Fields\\Providers\\ServiceProvider"
+      ]
+    }
+  }
 }
