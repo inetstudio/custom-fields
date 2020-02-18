@@ -267,8 +267,12 @@ trait HasCustomFields
     {
         static::$dispatcher->dispatch('inetstudio.custom_fields.syncing', [$this, $customFields]);
 
+        foreach (array_diff($this->custom_fields->pluck('key')->toArray(), array_keys($customFields)) as $key) {
+            $this->deleteCustomField($key);
+        }
+
         foreach ($customFields ?? [] as $key => $value) {
-            if ($value === '') {
+            if (! $value) {
                 $this->deleteCustomField($key);
             } else {
                 $this->updateCustomField($key, $value);
