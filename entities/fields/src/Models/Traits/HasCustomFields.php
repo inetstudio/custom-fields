@@ -143,7 +143,7 @@ trait HasCustomFields
     public function scopeWithAllCustomFields(Builder $query, $customFields): Builder
     {
         $customFields = $this->isCustomFieldsStringBased($customFields)
-            ? $customFields : $this->hydrateCustomFields($customFields)->pluck('key');
+            ? $customFields : $this->hydrateCustomFields($customFields)->pluck('key')->toArray();
 
         collect($customFields)->each(
             function ($customFieldsItem) use ($query) {
@@ -172,7 +172,7 @@ trait HasCustomFields
     public function scopeWithAnyCustomField(Builder $query, $customFields): Builder
     {
         $customFields = $this->isCustomFieldsStringBased($customFields)
-            ? $customFields : $this->hydrateCustomFields($customFields)->pluck('key');
+            ? $customFields : $this->hydrateCustomFields($customFields)->pluck('key')->toArray();
 
         return $query->whereHas(
             'custom_fields',
@@ -210,7 +210,7 @@ trait HasCustomFields
     public function scopeWithoutCustomFields(Builder $query, $customFields): Builder
     {
         $customFields = $this->isCustomFieldsStringBased($customFields)
-            ? $customFields : $this->hydrateCustomFields($customFields)->pluck('key');
+            ? $customFields : $this->hydrateCustomFields($customFields)->pluck('key')->toArray();
 
         return $query->whereDoesntHave(
             'custom_fields',
